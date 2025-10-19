@@ -1,0 +1,6 @@
+id=device.boost
+name=Device Performance Boost
+version=1.0
+versionCode=1
+author=NGO TAN SANG EBA
+description=Tối ưu hoá thiết bị: CPU, mạng, tần số quét, zRAM, con trỏ, I/O. Yêu cầu ROOT.
