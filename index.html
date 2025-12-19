@@ -3,268 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MENU IOS•FF🇻🇳</title>
+    <title>SANG PREMIUN V2</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        :root {
+            --primary: #00f2ff;
+            --accent: #bc00ff;
+            --bg-dark: #08080a;
+            --row-bg: rgba(255, 255, 255, 0.05);
+        }
 
         body {
-            font-family: 'Orbitron', sans-serif;
             margin: 0;
-            padding: 0;
-            background: #111;
-            color: #ecf0f1;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            background: #020202;
+            font-family: 'Segoe UI', sans-serif;
             overflow: hidden;
+            perspective: 1000px;
         }
 
-        .menu-container {
-            background: rgba(18, 18, 18, 0.95);
-            border: 2px solid #00f0ff;
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.5), inset 0 0 8px rgba(0, 240, 255, 0.3);
+        body::before {
+            content: "";
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0, 242, 255, 0.03) 1px, rgba(0, 242, 255, 0.03) 2px);
+            z-index: -1;
+            animation: scan 10s linear infinite;
+        }
+
+        @keyframes scan { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+
+        #menu-container {
+            width: 360px;
+            background: var(--bg-dark);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(0, 242, 255, 0.25);
+            overflow: hidden;
+            transition: 0.1s;
+        }
+
+        .header {
             padding: 20px;
-            max-width: 380px;
-            width: 90%;
             text-align: center;
-            transition: all 0.6s ease-in-out;
-            position: relative;
-            z-index: 10;
+            font-weight: 900;
+            font-size: 22px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .header h1 {
-            color: #ff0077;
-            text-shadow: 0 0 8px #ff0077;
-            font-size: 1.8em;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
+        .tab-wrapper {
+            display: flex;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .header p {
-            color: #00f0ff;
-            font-size: 0.9em;
-            margin-top: -10px;
-            padding-bottom: 10px;
-        }
-
-        #login-menu input {
-            width: calc(100% - 20px);
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #00f0ff;
-            border-radius: 8px;
-            background: #222;
-            color: #00f0ff;
-            font-size: 1em;
-            box-shadow: 0 0 5px rgba(0, 240, 255, 0.3);
-        }
-
-        .btn-submit {
-            background: linear-gradient(90deg, #ff0077, #ff9900);
-            color: white;
-            border: none;
-            padding: 14px 30px;
-            border-radius: 6px;
+        .tab-btn {
+            flex: 1;
+            padding: 15px 0;
+            text-align: center;
             cursor: pointer;
-            font-size: 1.1em;
+            font-size: 13px;
+            color: #555;
             font-weight: bold;
-            margin-top: 15px;
-            transition: all 0.3s, transform 0.1s;
-            box-shadow: 0 4px 10px rgba(255, 0, 119, 0.4);
+            transition: 0.3s;
         }
 
-        .btn-submit:hover {
-            background: linear-gradient(90deg, #ff9900, #ff0077);
-            transform: scale(1.05);
+        .tab-btn.active {
+            color: var(--primary);
+            background: rgba(0, 242, 255, 0.08);
+            box-shadow: inset 0 -3px 0 var(--primary);
         }
 
-        .error-message {
-            color: #ffdd00;
-            margin-top: 10px;
-            font-weight: bold;
-            font-size: 0.9em;
-        }
+        .content { padding: 20px; min-height: 280px; }
+        .tab-panel { display: none; animation: slideUp 0.4s ease; }
+        .tab-panel.active { display: block; }
 
-        #feature-menu {
-            display: none;
-            text-align: left;
-        }
-        
-        #feature-menu h3 {
-            color: #00f0ff;
-            text-shadow: 0 0 5px #00f0ff;
-            font-size: 1.1em;
-            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
-            padding-bottom: 5px;
-            margin-top: 15px;
-        }
-
-        .feature-box {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 10px;
+        .hack-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            transition: all 0.3s;
+            margin-bottom: 15px;
+            background: var(--row-bg);
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
         }
 
-        .feature-box:hover {
-            background: rgba(30, 0, 40, 0.7);
-            border-color: #ff0077;
-            box-shadow: 0 0 10px rgba(255, 0, 119, 0.5);
+        .hack-name {
+            background: linear-gradient(120deg, #ffffff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            filter: drop-shadow(0 0 5px rgba(0, 242, 255, 0.3));
         }
 
-        .feature-box label {
+        .switch { position: relative; width: 44px; height: 22px; }
+        .switch input { display: none; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background: #222; border-radius: 20px; transition: 0.4s;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px;
+            background: #fff; border-radius: 50%; transition: 0.4s;
+            box-shadow: 0 0 10px var(--primary);
+        }
+        input:checked + .slider { background: var(--primary); }
+        input:checked + .slider:before { transform: translateX(22px); }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
             font-weight: bold;
-            color: #ecf0f1;
-            flex-grow: 1;
-            font-size: 0.9em;
-        }
-
-        .neon-button {
-            width: 60px;
-            padding: 6px 0;
-            text-align: center;
-            border-radius: 4px;
             cursor: pointer;
-            font-weight: bold;
-            font-size: 0.8em;
-            transition: all 0.2s ease;
-            box-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
+            text-transform: uppercase;
+            transition: 0.3s;
+            margin-top: 10px;
         }
 
-        .neon-button.off {
-            background: #555;
-            color: #ccc;
-            border: 1px solid #555;
-        }
-        
-        .neon-button.on {
-            background: #00f0ff;
-            color: #111;
-            border: 1px solid #00f0ff;
-            box-shadow: 0 0 10px #00f0ff, inset 0 0 6px rgba(0, 0, 0, 0.5);
-            transform: translateY(1px);
-        }
-        
-        .status-bar {
-            margin-top: 15px;
-            padding: 10px;
-            background: linear-gradient(90deg, #ff0077, #00f0ff);
-            border-radius: 4px;
-            font-size: 0.9em;
-            margin-bottom: 15px; 
+        .btn-main {
+            background: linear-gradient(90deg, var(--primary), #00a2ff);
+            color: #000;
+            box-shadow: 0 5px 20px rgba(0, 242, 255, 0.4);
         }
 
-        @keyframes neon-flash {
-            0% { box-shadow: 0 0 5px #ff0077; }
-            50% { box-shadow: 0 0 10px #00f0ff; }
-            100% { box-shadow: 0 0 5px #ff0077; }
+        .btn-fb { background: #1877f2; color: #fff; box-shadow: 0 5px 15px rgba(24, 119, 242, 0.3); }
+
+        .input-group { margin-bottom: 15px; padding: 0 20px; }
+        .input-box {
+            width: 100%; padding: 14px; background: #111; border: 1px solid #222;
+            border-radius: 8px; color: #fff; box-sizing: border-box; outline: none;
         }
+        .input-box:focus { border-color: var(--primary); }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-    
-    <div class="menu-container">
-        <div class="header">
-            <h1>MENU IOS•FF🇻🇳</h1>
-            <p>Admin: <span style="color: #ff0077;">[NGOTANSANG•BASAN]</span></p>
-        </div>
 
-        <div id="login-menu">
-            <input type="text" id="username" placeholder="nhập tài khoản" required>
-            <input type="password" id="password" placeholder="nhập mật khẩu" required>
-            <button class="btn-submit" onclick="handleLogin()">Xác Nhận</button>
-            <p class="error-message" id="error-msg"></p>
-        </div>
+<div id="menu-container">
+    <div class="header">NGOTANSANG MOD PRO</div>
 
-        <div id="feature-menu">
-            <div class="status-bar">
-                ⚡ INJECTING... 100% COMPLETED⚡
-            </div>
-            
-            <h3>🔥 AIMING FUNCTIONS</h3>
-            
-            <div class="feature-box">
-                <label>aimbot</label>
-                <div id="btn-aimbot" class="neon-button off" data-state="off" onclick="toggleFeature(this, 'aimbot')">OFF</div>
-            </div>
-
-            <div class="feature-box">
-                <label>aimlock</label>
-                <div id="btn-esp" class="neon-button off" data-state="off" onclick="toggleFeature(this, 'aimlock')">OFF</div>
-            </div>
-
-            <h3>⚙️ PERFORMANCE</h3>
-            
-            <div class="feature-box">
-                <label>booster fps</label>
-                <div id="btn-speed" class="neon-button off" data-state="off" onclick="toggleFeature(this, 'booster fps')">OFF</div>
-            </div>
-
-            <div class="feature-box">
-                <label>dpi 1700</label>
-                <div id="btn-diamond" class="neon-button off" data-state="off" onclick="toggleFeature(this, 'dpi 1700')">OFF</div>
-            </div>
-            
-            </div>
+    <div id="login-section">
+        <div style="height: 20px;"></div>
+        <div class="input-group"><input type="text" id="user" class="input-box" placeholder="USERNAME"></div>
+        <div class="input-group"><input type="password" id="pass" class="input-box" placeholder="PASSWORD"></div>
+        <div class="input-group"><button class="btn btn-main" onclick="checkAuth()">ACTIVATE SYSTEM</button></div>
+        <div style="height: 20px;"></div>
     </div>
 
-    <script>
-        const CORRECT_USERNAME_B64 = "bmdvdGFuc2FuZzk0"; 
-        const CORRECT_PASSWORD_B64 = "MDkwNA=="; 
+    <div id="main-section" style="display: none;">
+        <div class="tab-wrapper">
+            <div class="tab-btn active" onclick="switchTab(this, 'tab-info')">THÔNG TIN</div>
+            <div class="tab-btn" onclick="switchTab(this, 'tab-hack')">CHỨC NĂNG</div>
+            <div class="tab-btn" onclick="switchTab(this, 'tab-set')">CÀI ĐẶT</div>
+        </div>
 
-        function encodeBase64(str) {
-            return btoa(str);
+        <div class="content">
+            <div id="tab-info" class="tab-panel active">
+                <div style="background: rgba(255,255,255,0.02); padding: 15px; border-radius: 10px; border-left: 4px solid var(--accent);">
+                    <p style="margin: 5px 0; color: #888;">Tác giả: <span style="color: #fff;">NGOTANSANG</span></p>
+                    <p style="margin: 5px 0; color: #888;">Dung lượng: <span style="color: #fff;">12.5 MB</span></p>
+                </div>
+                <button class="btn btn-fb" onclick="openFB()">MỞ FACEBOOK TÁC GIẢ</button>
+            </div>
+
+            <div id="tab-hack" class="tab-panel">
+                <div class="hack-row"><span class="hack-name">🎯 AIMBOT 100%</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="hack-row"><span class="hack-name">🔒 AIMLOCK PRO</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="hack-row"><span class="hack-name">💀 AUTO HEADSHOT</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="hack-row"><span class="hack-name">🚫 NO RECOIL</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <button class="btn btn-main" style="background: #00ff88; color: #000;" onclick="window.location.href='freefire://'">OPEN FREE FIRE</button>
+            </div>
+
+            <div id="tab-set" class="tab-panel">
+                <p style="color: #aaa; font-size: 14px;">Chọn màu sắc chủ đạo:</p>
+                <input type="color" id="colorPicker" value="#00f2ff" onchange="updateTheme(this.value)" style="width: 100%; height: 45px; border: none; background: none; cursor: pointer;">
+                <p style="text-align: center; margin-top: 30px; font-size: 11px; color: #333;">NGOTANSANG MOD MENU © 2024</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const USER_B64 = "bmdvdGFuc2FuZzEx";
+    const PASS_B64 = "OTQxMQ==";
+
+    function checkAuth() {
+        const u = btoa(document.getElementById('user').value);
+        const p = btoa(document.getElementById('pass').value);
+        if(u === USER_B64 && p === PASS_B64) {
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('main-section').style.display = 'block';
+        } else {
+            alert("⚠️ Truy cập bị từ chối!");
         }
+    }
 
-        function toggleFeature(buttonElement, featureName) {
-            let currentState = buttonElement.getAttribute('data-state');
+    function switchTab(btn, tabId) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+    }
 
-            if (currentState === 'off') {
-                buttonElement.textContent = 'ON';
-                buttonElement.classList.remove('off');
-                buttonElement.classList.add('on');
-                buttonElement.setAttribute('data-state', 'on');
-                alert(`[${featureName}] Inject thành công!`);
+    function openFB() { window.location.href = "https://www.facebook.com/share/1AH77hgpcR/"; }
 
-            } else {
-                buttonElement.textContent = 'OFF';
-                buttonElement.classList.remove('on');
-                buttonElement.classList.add('off');
-                buttonElement.setAttribute('data-state', 'off');
-                alert(`[${featureName}] Tắt thành công!`);
-            }
-        }
+    function updateTheme(color) {
+        document.documentElement.style.setProperty('--primary', color);
+    }
 
-        function handleLogin() {
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
-            const errorMsg = document.getElementById('error-msg');
-            
-            const enteredUsernameB64 = encodeBase64(username);
-            const enteredPasswordB64 = encodeBase64(password);
+    const menu = document.getElementById('menu-container');
+    document.addEventListener('mousemove', (e) => {
+        let x = (window.innerWidth / 2 - e.pageX) / 40;
+        let y = (window.innerHeight / 2 - e.pageY) / 40;
+        menu.style.transform = `rotateY(${-x}deg) rotateX(${y}deg)`;
+    });
+</script>
 
-            if (enteredUsernameB64 === CORRECT_USERNAME_B64 && enteredPasswordB64 === CORRECT_PASSWORD_B64) {
-                errorMsg.textContent = "✅ Kích hoạt Key thành công!";
-                errorMsg.style.color = '#00f0ff';
-                
-                setTimeout(() => {
-                    document.getElementById('login-menu').style.display = 'none';
-                    document.getElementById('feature-menu').style.display = 'block';
-                    document.querySelector('.menu-container').style.maxWidth = '380px'; 
-                }, 1500);
-                
-            } else {
-                errorMsg.textContent = "❌ Key Kích hoạt không hợp lệ hoặc đã hết hạn. Vui lòng kiểm tra lại Key.";
-                errorMsg.style.color = '#ff0077';
-            }
-        }
-    </script>
 </body>
 </html>
