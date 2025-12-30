@@ -3,235 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SANG PREMIUN V2</title>
+    <title>ZArchiver Pro - Persistent</title>
     <style>
-        :root {
-            --primary: #00f2ff;
-            --accent: #bc00ff;
-            --bg-dark: #08080a;
-            --row-bg: rgba(255, 255, 255, 0.05);
-        }
-
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #020202;
-            font-family: 'Segoe UI', sans-serif;
-            overflow: hidden;
-            perspective: 1000px;
-        }
-
-        body::before {
-            content: "";
-            position: absolute;
-            width: 150%;
-            height: 150%;
-            background: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0, 242, 255, 0.03) 1px, rgba(0, 242, 255, 0.03) 2px);
-            z-index: -1;
-            animation: scan 10s linear infinite;
-        }
-
-        @keyframes scan { from { transform: translateY(0); } to { transform: translateY(-50%); } }
-
-        #menu-container {
-            width: 360px;
-            background: var(--bg-dark);
-            border: 2px solid var(--primary);
-            border-radius: 20px;
-            box-shadow: 0 0 40px rgba(0, 242, 255, 0.25);
-            overflow: hidden;
-            transition: 0.1s;
-        }
-
-        .header {
-            padding: 20px;
-            text-align: center;
-            font-weight: 900;
-            font-size: 22px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .tab-wrapper {
-            display: flex;
-            background: rgba(255, 255, 255, 0.03);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 15px 0;
-            text-align: center;
-            cursor: pointer;
-            font-size: 13px;
-            color: #555;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .tab-btn.active {
-            color: var(--primary);
-            background: rgba(0, 242, 255, 0.08);
-            box-shadow: inset 0 -3px 0 var(--primary);
-        }
-
-        .content { padding: 20px; min-height: 280px; }
-        .tab-panel { display: none; animation: slideUp 0.4s ease; }
-        .tab-panel.active { display: block; }
-
-        .hack-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            background: var(--row-bg);
-            padding: 14px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-        }
-
-        .hack-name {
-            background: linear-gradient(120deg, #ffffff, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 800;
-            font-size: 15px;
-            letter-spacing: 0.5px;
-            filter: drop-shadow(0 0 5px rgba(0, 242, 255, 0.3));
-        }
-
-        .switch { position: relative; width: 44px; height: 22px; }
-        .switch input { display: none; }
-        .slider {
-            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-            background: #222; border-radius: 20px; transition: 0.4s;
-        }
-        .slider:before {
-            position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px;
-            background: #fff; border-radius: 50%; transition: 0.4s;
-            box-shadow: 0 0 10px var(--primary);
-        }
-        input:checked + .slider { background: var(--primary); }
-        input:checked + .slider:before { transform: translateX(22px); }
-
-        .btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: 0.3s;
-            margin-top: 10px;
-        }
-
-        .btn-main {
-            background: linear-gradient(90deg, var(--primary), #00a2ff);
-            color: #000;
-            box-shadow: 0 5px 20px rgba(0, 242, 255, 0.4);
-        }
-
-        .btn-fb { background: #1877f2; color: #fff; box-shadow: 0 5px 15px rgba(24, 119, 242, 0.3); }
-
-        .input-group { margin-bottom: 15px; padding: 0 20px; }
-        .input-box {
-            width: 100%; padding: 14px; background: #111; border: 1px solid #222;
-            border-radius: 8px; color: #fff; box-sizing: border-box; outline: none;
-        }
-        .input-box:focus { border-color: var(--primary); }
-
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        :root { --bg: #121212; --surface: #1e1e1e; --primary: #4CAF50; --text: #e0e0e0; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; user-select: none; }
+        .header { background: var(--surface); padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.5); position: sticky; top: 0; z-index: 10; }
+        .path-display { font-size: 12px; color: var(--primary); background: #000; padding: 10px; border-radius: 4px; word-break: break-all; margin-top: 10px; border: 1px solid #333; }
+        .file-container { padding: 10px; min-height: 60vh; }
+        .item { display: flex; align-items: center; padding: 12px; border-radius: 8px; margin-bottom: 5px; border: 1px solid transparent; }
+        .item.selected { background: rgba(76, 175, 80, 0.2); border: 1px solid var(--primary); }
+        .icon { font-size: 24px; margin-right: 15px; }
+        .info { flex-grow: 1; }
+        .size { font-size: 11px; color: #888; }
+        .bottom-bar { position: fixed; bottom: 0; width: 100%; background: var(--surface); display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #333; }
+        .btn { display: flex; flex-direction: column; align-items: center; font-size: 12px; color: var(--text); cursor: pointer; border: none; background: none; transition: 0.3s; }
+        .btn:disabled { opacity: 0.3; filter: grayscale(1); }
+        .nav-buttons { display: flex; gap: 10px; }
+        .nav-btn { background: #333; color: white; border: none; padding: 8px 12px; border-radius: 4px; font-size: 12px; flex: 1; }
+        .nav-btn.active { background: var(--primary); }
     </style>
 </head>
 <body>
 
-<div id="menu-container">
-    <div class="header">NGOTANSANG MOD PRO</div>
-
-    <div id="login-section">
-        <div style="height: 20px;"></div>
-        <div class="input-group"><input type="text" id="user" class="input-box" placeholder="USERNAME"></div>
-        <div class="input-group"><input type="password" id="pass" class="input-box" placeholder="PASSWORD"></div>
-        <div class="input-group"><button class="btn btn-main" onclick="checkAuth()">ACTIVATE SYSTEM</button></div>
-        <div style="height: 20px;"></div>
+<div class="header">
+    <div class="nav-buttons">
+        <button id="btn-dl" class="nav-btn" onclick="goToPath('download')">Download</button>
+        <button id="btn-game" class="nav-btn" onclick="goToPath('game')">Config Game</button>
     </div>
+    <div class="path-display" id="pathText">/sdcard/Download/</div>
+</div>
 
-    <div id="main-section" style="display: none;">
-        <div class="tab-wrapper">
-            <div class="tab-btn active" onclick="switchTab(this, 'tab-info')">THÔNG TIN</div>
-            <div class="tab-btn" onclick="switchTab(this, 'tab-hack')">CHỨC NĂNG</div>
-            <div class="tab-btn" onclick="switchTab(this, 'tab-set')">CÀI ĐẶT</div>
-        </div>
+<div class="file-container" id="fileList"></div>
 
-        <div class="content">
-            <div id="tab-info" class="tab-panel active">
-                <div style="background: rgba(255,255,255,0.02); padding: 15px; border-radius: 10px; border-left: 4px solid var(--accent);">
-                    <p style="margin: 5px 0; color: #888;">Tác giả: <span style="color: #fff;">NGOTANSANG</span></p>
-                    <p style="margin: 5px 0; color: #888;">Dung lượng: <span style="color: #fff;">12.5 MB</span></p>
-                </div>
-                <button class="btn btn-fb" onclick="openFB()">MỞ FACEBOOK TÁC GIẢ</button>
-            </div>
-
-            <div id="tab-hack" class="tab-panel">
-                <div class="hack-row"><span class="hack-name">🎯 AIMBOT 100%</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                <div class="hack-row"><span class="hack-name">🔒 AIMLOCK PRO</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                <div class="hack-row"><span class="hack-name">💀 AUTO HEADSHOT</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                <div class="hack-row"><span class="hack-name">🚫 NO RECOIL</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                <button class="btn btn-main" style="background: #00ff88; color: #000;" onclick="window.location.href='freefire://'">OPEN FREE FIRE</button>
-            </div>
-
-            <div id="tab-set" class="tab-panel">
-                <p style="color: #aaa; font-size: 14px;">Chọn màu sắc chủ đạo:</p>
-                <input type="color" id="colorPicker" value="#00f2ff" onchange="updateTheme(this.value)" style="width: 100%; height: 45px; border: none; background: none; cursor: pointer;">
-                <p style="text-align: center; margin-top: 30px; font-size: 11px; color: #333;">NGOTANSANG MOD MENU © 2024</p>
-            </div>
-        </div>
-    </div>
+<div class="bottom-bar">
+    <button class="btn" id="copyBtn" onclick="setOperation('copy')" disabled><span>📋</span>Sao chép</button>
+    <button class="btn" id="cutBtn" onclick="setOperation('cut')" disabled><span>✂️</span>Cắt</button>
+    <button class="btn" id="pasteBtn" onclick="pasteFile()" disabled><span>📥</span>Dán tại đây</button>
+    <button class="btn" onclick="resetApp()"><span>🔄</span>Reset</button>
 </div>
 
 <script>
-    const USER_B64 = "bmdvdGFuc2FuZzEx";
-    const PASS_B64 = "OTQxMQ==";
+    // 1. Khởi tạo dữ liệu
+    let currentDir = 'download'; 
+    let selectedFile = null;
+    let clipboard = null; 
 
-    function checkAuth() {
-        const u = btoa(document.getElementById('user').value);
-        const p = btoa(document.getElementById('pass').value);
-        if(u === USER_B64 && p === PASS_B64) {
-            document.getElementById('login-section').style.display = 'none';
-            document.getElementById('main-section').style.display = 'block';
+    const paths = {
+        download: "/sdcard/Download/",
+        game: "/sdcard/iOS/data/com.dts.fefeth/files/contentcache/Compulsory/ios/gameassetbundles/config/"
+    };
+
+    // Dữ liệu mặc định
+    const defaultFiles = {
+        download: [{ name: "lockbot.so", size: "13.42 MB" }, { name: "instruction.txt", size: "2 KB" }],
+        game: []
+    };
+
+    let files = {};
+
+    // 2. Hàm lưu và tải dữ liệu từ trình duyệt
+    function saveData() {
+        localStorage.setItem('zarchiver_files', JSON.stringify(files));
+        localStorage.setItem('zarchiver_path', currentDir);
+    }
+
+    function loadData() {
+        const saved = localStorage.getItem('zarchiver_files');
+        const savedPath = localStorage.getItem('zarchiver_path');
+        if (saved) {
+            files = JSON.parse(saved);
         } else {
-            alert("⚠️ Truy cập bị từ chối!");
+            files = JSON.parse(JSON.stringify(defaultFiles));
+        }
+        if (savedPath) currentDir = savedPath;
+    }
+
+    // 3. Hiển thị giao diện
+    function render() {
+        const list = document.getElementById('fileList');
+        const pathText = document.getElementById('pathText');
+        list.innerHTML = "";
+        pathText.innerText = paths[currentDir];
+
+        // Highlight nút điều hướng
+        document.getElementById('btn-dl').className = `nav-btn ${currentDir === 'download' ? 'active' : ''}`;
+        document.getElementById('btn-game').className = `nav-btn ${currentDir === 'game' ? 'active' : ''}`;
+
+        files[currentDir].forEach(f => {
+            const div = document.createElement('div');
+            div.className = `item ${selectedFile === f.name ? 'selected' : ''}`;
+            div.onclick = () => selectFile(f.name);
+            div.innerHTML = `
+                <span class="icon">${f.name.endsWith('.so') ? '⚙️' : '📄'}</span>
+                <div class="info">
+                    <div>${f.name}</div>
+                    <div class="size">${f.size}</div>
+                </div>`;
+            list.appendChild(div);
+        });
+
+        document.getElementById('pasteBtn').disabled = !clipboard;
+    }
+
+    function selectFile(name) {
+        selectedFile = (selectedFile === name) ? null : name;
+        document.getElementById('copyBtn').disabled = !selectedFile;
+        document.getElementById('cutBtn').disabled = !selectedFile;
+        render();
+    }
+
+    function goToPath(dir) {
+        currentDir = dir;
+        selectedFile = null;
+        saveData(); // Lưu lại vị trí thư mục cuối cùng
+        render();
+    }
+
+    function setOperation(type) {
+        clipboard = { 
+            file: files[currentDir].find(f => f.name === selectedFile), 
+            type: type, 
+            from: currentDir 
+        };
+        alert(`Đã chuẩn bị để ${type === 'copy' ? 'sao chép' : 'di chuyển'}: ${selectedFile}`);
+        render();
+    }
+
+    function pasteFile() {
+        if (!clipboard) return;
+
+        // Thêm vào thư mục hiện tại
+        files[currentDir].push(clipboard.file);
+
+        // Nếu là Cắt thì xóa ở thư mục gốc
+        if (clipboard.type === 'cut') {
+            files[clipboard.from] = files[clipboard.from].filter(f => f.name !== clipboard.file.name);
+        }
+
+        alert("Dán thành công!");
+        clipboard = null;
+        saveData(); // Ghi nhớ thay đổi vào bộ nhớ trình duyệt
+        render();
+    }
+
+    function resetApp() {
+        if(confirm("Bạn muốn reset lại dữ liệu ban đầu?")) {
+            localStorage.clear();
+            location.reload();
         }
     }
 
-    function switchTab(btn, tabId) {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById(tabId).classList.add('active');
-    }
-
-    function openFB() { window.location.href = "https://www.facebook.com/share/1AH77hgpcR/"; }
-
-    function updateTheme(color) {
-        document.documentElement.style.setProperty('--primary', color);
-    }
-
-    const menu = document.getElementById('menu-container');
-    document.addEventListener('mousemove', (e) => {
-        let x = (window.innerWidth / 2 - e.pageX) / 40;
-        let y = (window.innerHeight / 2 - e.pageY) / 40;
-        menu.style.transform = `rotateY(${-x}deg) rotateX(${y}deg)`;
-    });
+    // Chạy ứng dụng
+    loadData();
+    render();
 </script>
-
 </body>
 </html>
